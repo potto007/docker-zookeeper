@@ -1,16 +1,19 @@
 # Apache Zookeeper
 
-FROM digitalwonderland/base:latest
+FROM ubuntu:14.04
+MAINTAINER Yohann Brédoux <yohann.bredoux@gmail.com>
 
-ENV ZOOKEEPER_VERSION 3.4.6
+ENV ZK_VERSION 3.4.6
 
-ADD ./src /
+ADD ./src /usr/local/sbin
 
-RUN chmod +x /usr/local/sbin/start.sh
+RUN chmod +x /usr/local/sbin/zk-start.sh
 
-RUN yum install -y java-1.7.0-openjdk-headless tar && yum clean all
+RUN apt-get update && apt-get install -y \
+    curl \
+    openjdk-7-jre-headless
 
-RUN curl -sS http://mirrors.sonic.net/apache/zookeeper/current/zookeeper-${ZOOKEEPER_VERSION}.tar.gz | tar -xzf - -C /opt \
+RUN curl -sS http://mirrors.sonic.net/apache/zookeeper/current/zookeeper-${ZK_VERSION}.tar.gz | tar -xzf - -C /opt \
   && mv /opt/zookeeper-* /opt/zookeeper \
   && chown -R root:root /opt/zookeeper
 
@@ -23,4 +26,4 @@ EXPOSE 2181 2888 3888
 
 VOLUME ["/opt/zookeeper/conf", "/var/lib/zookeeper"]
 
-ENTRYPOINT ["/usr/local/sbin/start.sh"]
+ENTRYPOINT ["/usr/local/sbin/zk-start.sh"]
