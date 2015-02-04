@@ -4,13 +4,16 @@ Docker image which lets you run Zookeeper containers on single/cluster mode with
 You can either run :
 - a single zookeeper server on a single host with docker
 - a cluster of zookeeper servers on a single host with docker
-- a cluster of zookeeper servers on many hosts with docker.
+- a cluster of zookeeper servers on many hosts with docker
 
 The image launches a script which generates zookeeper configuration files (zoo.cfg + myid) from environment variables before running zookeeper server.
 
 # Usage
 
-Simply run
+Simply run a single zookeeper on your development machine
+> docker run -dtP ybrdx/zookeeper
+
+or from the Gihub [repo](https://github.com/ybr/docker-zookeeper)
 > fig up -d
 
 ## boot2docker (cluster & single host)
