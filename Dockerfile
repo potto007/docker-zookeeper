@@ -1,7 +1,8 @@
 # Apache Zookeeper
 
-FROM ubuntu:14.04
-MAINTAINER Yohann Brédoux <yohann.bredoux@gmail.com>
+# give ability to login in non-init namespaces
+FROM sequenceiq/pam:ubuntu-14.04
+MAINTAINER Paul Otto <paul@ottoops.com>
 
 ENV ZK_VERSION 3.4.6
 
